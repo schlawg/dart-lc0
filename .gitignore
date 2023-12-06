@@ -1,6 +1,6 @@
 .DS_Store
 .dart_tool/
-
+.vscode/
 .packages
 .pub/
 
@@ -8,7 +8,5 @@
 build/
 
 .depend
-*.nnue
-Makefile
 eigen
 lc0

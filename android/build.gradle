@@ -1,11 +1,6 @@
 group 'com.lc0'
 version '1.0'
 
-task runBeforeCMake(type: Exec) {
-    workingDir '../'
-    commandLine 'bash', './fetchSource.sh'
-}
-
 buildscript {
     repositories {
         google()
@@ -25,6 +20,13 @@ rootProject.allprojects {
 }
 
 apply plugin: 'com.android.library'
+
+task runBeforeCMake(type: Exec) {
+    workingDir '../'
+    commandLine 'bash', './fetchSource.sh'
+}
+
+preBuild.dependsOn runBeforeCMake
 
 android {
     // add support for both AGP v8 and older versions
