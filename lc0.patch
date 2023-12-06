@@ -1,0 +1,72 @@
+diff --git a/.gitignore b/.gitignore
+index c90b403..29cb4b5 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,5 +1,6 @@
+ !subprojects/*.wrap
+ *.swp
++*.o
+ .clang_complete
+ .DS_Store
+ .cache/
+@@ -10,6 +11,7 @@ compile_commands.json
+ CUDA_NN/
+ lc0.xcodeproj/
+ LC0VSProj/
++src/proto/
+ src/.vs/
+ subprojects/*
+ testdata/
+diff --git a/src/main.cc b/src/main.cc
+index 4c8880d..24e855c 100644
+--- a/src/main.cc
++++ b/src/main.cc
+@@ -52,21 +52,11 @@ int main(int argc, const char** argv) {
+ 
+     CommandLine::Init(argc, argv);
+     CommandLine::RegisterMode("uci", "(default) Act as UCI engine");
+-    CommandLine::RegisterMode("selfplay", "Play games with itself");
+     CommandLine::RegisterMode("benchmark", "Quick benchmark");
+     CommandLine::RegisterMode("backendbench",
+                               "Quick benchmark of backend only");
+-    CommandLine::RegisterMode("leela2onnx", "Convert Leela network to ONNX.");
+-    CommandLine::RegisterMode("onnx2leela",
+-                              "Convert ONNX network to Leela net.");
+-    CommandLine::RegisterMode("describenet",
+-                              "Shows details about the Leela network.");
+ 
+-    if (CommandLine::ConsumeCommand("selfplay")) {
+-      // Selfplay mode.
+-      SelfPlayLoop loop;
+-      loop.RunLoop();
+-    } else if (CommandLine::ConsumeCommand("benchmark")) {
++    if (CommandLine::ConsumeCommand("benchmark")) {
+       // Benchmark mode.
+       Benchmark benchmark;
+       benchmark.Run();
+@@ -74,12 +64,6 @@ int main(int argc, const char** argv) {
+       // Backend Benchmark mode.
+       BackendBenchmark benchmark;
+       benchmark.Run();
+-    } else if (CommandLine::ConsumeCommand("leela2onnx")) {
+-      lczero::ConvertLeelaToOnnx();
+-    } else if (CommandLine::ConsumeCommand("onnx2leela")) {
+-      lczero::ConvertOnnxToLeela();
+-    } else if (CommandLine::ConsumeCommand("describenet")) {
+-      lczero::DescribeNetworkCmd();
+     } else {
+       // Consuming optional "uci" mode.
+       CommandLine::ConsumeCommand("uci");
+diff --git a/src/mcts/stoppers/common.cc b/src/mcts/stoppers/common.cc
+index f969725..7c2664b 100644
+--- a/src/mcts/stoppers/common.cc
++++ b/src/mcts/stoppers/common.cc
+@@ -25,7 +25,7 @@
+   Program grant you additional permission to convey the resulting work.
+ */
+ 
+-#include "src/mcts/stoppers/common.h"
++#include "mcts/stoppers/common.h"
+ 
+ namespace lczero {
+ 
