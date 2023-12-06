@@ -22,7 +22,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.lc0
+        package: lichess
         pluginClass: Lc0Plugin
       ios:
         pluginClass: Lc0Plugin
