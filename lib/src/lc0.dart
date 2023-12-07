@@ -99,7 +99,7 @@ class Lc0 {
 
 /// Creates a C++ engine asynchronously.
 ///
-/// This method is different from the factory method [new Lc0] that
+/// This method is different from the factory method [Lc0.new] that
 /// it will wait for the engine to be ready before returning the instance.
 Future<Lc0> lc0Async() {
   if (Lc0._instance != null) {

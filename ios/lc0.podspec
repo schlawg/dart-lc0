@@ -12,11 +12,12 @@ Pod::Spec.new do |s|
   s.version          = pubspec['version']
   s.summary          = pubspec['description']
   s.homepage         = pubspec['homepage']
-  s.license          = { :file => '../LICENSE', :type => 'MIT' }
+  s.license          = { :file => '../LICENSE', :type => 'GPL' }
   s.author           = 'T-Bone Duplexus'
   s.source = { :git => pubspec['repository'], :tag => s.version.to_s }
   s.source_files = [
     'Classes/Lc0Plugin.mm',
+    'Classes/Lc0Plugin.h',
     '../src/ffi.cpp',
     '../lc0/src/benchmark/backendbench.cc',
     '../lc0/src/benchmark/benchmark.cc',
@@ -66,28 +67,28 @@ Pod::Spec.new do |s|
     '../lc0/src/utils/optionsparser.cc',
     '../lc0/src/utils/weights_adapter.cc',
     '../lc0/src/version.cc',
-    '../lc0/src/engine.cc'
+    'lc0/src/engine.cc'
   ]
-  s.public_header_files = 'Classes/**/*.h', '../eigen', '../src', '../lc0/src'  
+  s.public_header_files = 'Classes/Lc0Plugin.h'  
   s.prepare_command = <<-CMD
     bash ../fetchSources.sh
   CMD
   s.dependency 'Flutter'
-  s.platform = :ios, '11.0'
-  s.ios.deployment_target  = '11.0'
+  s.platform = :ios, '12.0'
+  s.ios.deployment_target  = '12.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
 
   s.library = 'c++'
-  s.script_phase = {
-    # :execution_position => :before_compile,
-    # :name => 'Download nnue',
-    # :script => "[ -e 'nn-ad9b42354671.nnue' ] || curl --location --remote-name 'https://tests.stockfishchess.org/api/nn/nn-ad9b42354671.nnue'"
-  }
+  #s.script_phase = {
+  #  :execution_position => :before_compile,
+  #  :name => 'Fetch sources',
+  #  :script => "bash ../fetchSources.sh"
+  #}
   s.xcconfig = {
-    'CLANG_CXX_LANGUAGE_STANDARD' => 'c++17',
-    'CLANG_CXX_LIBRARY' => 'libc++',
+    # 'CLANG_CXX_LANGUAGE_STANDARD' => 'c++17',
+    # 'CLANG_CXX_LIBRARY' => 'libc++',
     'OTHER_CPLUSPLUSFLAGS' => '$(inherited) -fno-exceptions -std=c++17 -DUSE_PTHREADS -DEIGEN_NO_CPUID -DNDEBUG -O3 -DIS_64BIT -DNO_PEXT -flto=thin',
     'OTHER_LDFLAGS' => '$(inherited) -fno-exceptions -std=c++17 -DUSE_PTHREADS -DNDEBUG -O3 -DIS_64BIT -DNO_PEXT -flto=thin'
   }

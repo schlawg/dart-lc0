@@ -1,11 +1,11 @@
 name: lc0
-description: An Lc0 Chess Engine for Flutter.
-version: 1.4.0
-repository: https://github.com/lichess-org/dart-lc0.git
-homepage: https://github.com/lichess-org/dart-lc0.git
+description: Lc0 Flutter no GPU
+version: 1.0.0
+repository: https://github.com/schlawg/dart-lc0.git
+homepage: https://github.com/schlawg/dart-lc0.git
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=3.2.3 <4.0.0'
   flutter: '>=3.0.0'
 
 dependencies:

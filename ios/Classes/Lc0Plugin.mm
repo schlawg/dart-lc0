@@ -1,13 +1,13 @@
 #import "Lc0Plugin.h"
-#import "ffi.h"
+#import "../../src/ffi.h"
 
 @implementation Lc0Plugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   if (registrar == NULL) {
     // avoid dead code stripping
-    Lc0_main();
-    Lc0_stdin_write(NULL);
-    Lc0_stdout_read();
+    lc0_main();
+    lc0_stdin_write(NULL);
+    lc0_stdout_read();
   }
 }
 
