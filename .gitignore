@@ -8,5 +8,5 @@
 build/
 
 .depend
-eigen
-lc0
+/eigen
+/lc0
