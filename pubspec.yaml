@@ -1,8 +1,8 @@
 name: lc0
 description: Lc0 Flutter no GPU
 version: 1.0.0
-repository: https://github.com/schlawg/dart-lc0.git
-homepage: https://github.com/schlawg/dart-lc0.git
+repository: https://github.com/lichess-org/dart-lc0.git
+homepage: https://github.com/lichess-org/dart-lc0.git
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
