@@ -1,4 +1,4 @@
-package lc0.example
+package org.lichess
 
 import io.flutter.embedding.android.FlutterActivity
 

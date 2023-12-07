@@ -1,4 +1,4 @@
-package com.lc0;
+package lichess;
 
 import androidx.annotation.NonNull;
 

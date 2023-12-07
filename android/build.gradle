@@ -23,7 +23,7 @@ apply plugin: 'com.android.library'
 
 task runBeforeCMake(type: Exec) {
     workingDir '../'
-    commandLine 'bash', './fetchSource.sh'
+    commandLine 'bash', './fetchSources.sh'
 }
 
 preBuild.dependsOn runBeforeCMake

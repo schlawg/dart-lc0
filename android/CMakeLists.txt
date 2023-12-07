@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.4.1)
 project(lc0)
 
-add_custom_command(TARGET lc0 PRE_BUILD
-                   COMMAND bash ../fetchSources.sh
-                   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-
 add_library(
   lc0
   SHARED
