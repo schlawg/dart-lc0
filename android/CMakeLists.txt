@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.4.1)
 project(lc0)
 
+add_custom_command(TARGET lc0 PRE_BUILD
+                   COMMAND bash ../fetchSources.sh
+                   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 add_library(
   lc0
   SHARED
@@ -15,7 +19,6 @@ add_library(
   ../lc0/src/mcts/node.cc
   ../lc0/src/mcts/params.cc
   ../lc0/src/mcts/stoppers/alphazero.cc
-  ../lc0/src/mcts/stoppers/factory.cc
   ../lc0/src/mcts/stoppers/legacy.cc
   ../lc0/src/mcts/stoppers/simple.cc
   ../lc0/src/mcts/stoppers/smooth.cc
@@ -59,10 +62,11 @@ add_library(
 include_directories(../eigen ../lc0/src ../lc0 ../src)
 
 if(ANDROID_ABI STREQUAL arm64-v8a)
-  target_compile_options(lc0 PRIVATE -DEIGEN_NO_CPUID -DUSE_PTHREADS -DNDEBUG -O3 -DIS_64BIT -DNO_PEXT -DUSE_POPCNT -DUSE_NEON)
+  target_compile_options(lc0 PRIVATE -DEIGEN_NO_CPUID -DUSE_PTHREADS -DNDEBUG -O3 -DIS_64BIT -DNO_PEXT -DUSE_POPCNT)
 elseif(ANDROID_ABI STREQUAL armeabi-v7a)
   target_compile_options(lc0 PRIVATE -DEIGEN_NO_CPUID -DUSE_PTHREADS -DNDEBUG -O3 -DNO_PEXT)
 else()
   target_compile_options(lc0 PRIVATE -DEIGEN_NO_CPUID -DUSE_PTHREADS -DNDEBUG -O3 -DIS_64BIT -DUSE_POPCNT -DUSE_SSE2 -DUSE_SSSE3 -DUSE_SSE41 -DNO_PEXT -DUSE_POPCNT)
 endif()
+
 target_link_libraries(lc0 libz.so)

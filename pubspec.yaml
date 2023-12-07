@@ -25,4 +25,5 @@ flutter:
         package: lichess
         pluginClass: Lc0Plugin
       ios:
+        podspec: lc0.podspec
         pluginClass: Lc0Plugin

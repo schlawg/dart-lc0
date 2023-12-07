@@ -1,5 +1,5 @@
 #import "Lc0Plugin.h"
-#import "../../src/ffi.h"
+#import "ffi.h"
 
 @implementation Lc0Plugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
